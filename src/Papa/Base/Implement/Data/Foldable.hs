@@ -2,6 +2,7 @@
 
 module Papa.Base.Implement.Data.Foldable(
   mapM_
+, forM_
 , sequence_
 ) where
 
@@ -16,6 +17,14 @@ mapM_ ::
 mapM_ =
   traverse_
 
+forM_ ::
+  (Foldable t, Applicative m) =>
+  t a
+  -> (a -> m b)
+  -> m ()
+forM_ a f =
+  mapM_ f a
+  
 sequence_ ::
   (Foldable t, Applicative f) =>
   t (f a)

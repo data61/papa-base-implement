@@ -2,6 +2,7 @@
 
 module Papa.Base.Implement.Data.Traversable(
   mapM
+, forM
 , sequence
 ) where
 
@@ -15,6 +16,14 @@ mapM ::
   -> f (t b)
 mapM =
   traverse
+
+forM ::
+  (Traversable t, Applicative f) =>
+  t a
+  -> (a -> f b)
+  -> f (t b)
+forM a f =
+  traverse f a
 
 sequence ::
   (Traversable t, Applicative f) =>
